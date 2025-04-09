@@ -1,5 +1,6 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 /* Yasin Shilling
  * 4/1/25
@@ -15,6 +16,10 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 leftStart;
     private Vector3 rightStart;
+    private int lives;
+
+    public object HealthPoint1 { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,4 +53,10 @@ public class EnemyController : MonoBehaviour
             direction *= -1;
         }
     }
+
+
+   
+
+
+
 }
