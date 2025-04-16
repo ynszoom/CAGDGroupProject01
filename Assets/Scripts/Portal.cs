@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/* Yasin Shilling
- * 4/1/25
- * Dictates how portals work
+/* Olivia Foster
+ * 4/15/25
+ * Portal teleports player between levels
  */
 
 public class Portal : MonoBehaviour
 {
-    public Transform teleportPoint;
+    public GameObject spawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -19,14 +19,6 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Sets the position of the touched object to the teleport point
-        other.transform.position = teleportPoint.position;
-
         
     }
 }

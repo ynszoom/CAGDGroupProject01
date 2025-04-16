@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 respawnPoint;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -102,6 +103,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             print("GAME OVER");
+        }
+    }
+
+    /// <summary>
+    /// Olivia's Edits
+    /// </summary>
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Portal")
+        {
+            //reset the startPos to the spawnPoint position
+            respawnPoint = other.gameObject.GetComponent<Portal>().spawnPoint.transform.position;
+            //bring the player back to the start position
+            transform.position = respawnPoint;
         }
     }
 }
