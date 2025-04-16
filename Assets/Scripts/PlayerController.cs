@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public int coins = 0;
     public int lives;
     public int maxLives = 3;
-    public float killHeight = -5;
+    
 
     private Rigidbody rb;
     private Vector3 respawnPoint;
@@ -30,11 +30,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Jump();
-        if (transform.position.y < killHeight)
-        {
-            LoseLife();
-        }
+        
     }
 
     // FixedUpdate is called 50 times per second
