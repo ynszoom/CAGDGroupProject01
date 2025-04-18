@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 15;
     public float jumpForce = 10;
     public int coins = 0;
-    public int lives;
-    public int maxLives = 3;
+    public int Health;
+    public int maxHealth = 3;
     
 
     private Rigidbody rb;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lives = maxLives;
+        Health = maxHealth;
         rb = GetComponent<Rigidbody>();
         respawnPoint = transform.position;
     }
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Jump(); 
     }
 
     // FixedUpdate is called 50 times per second
@@ -49,17 +49,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             // Move right
-            //transform.position += Vector3.right * speed * Time.deltaTime;
             rb.MovePosition(transform.position + Vector3.right * speed * Time.deltaTime);
+            //rotates character facing right
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             // Move left
-            //transform.position += Vector3.left * speed * Time.deltaTime;
             rb.MovePosition(transform.position + Vector3.left * speed * Time.deltaTime);
+           //rotates character facing left
+           transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
+         
+        
     }
-
+     
+    
+        
     /// <summary>
     /// Checks for player jump input and 
     /// </summary>
@@ -88,15 +94,15 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Reduces player's lives by 1 and respawns if lives remain
+    /// Reduces player's health by 1 and grants temporary invincibility
     /// </summary>
-    public void LoseLife()
+    public void LoseHealth()
     {
         // Reduces player's lives
-        lives--;
+        Health--;
 
         // Check if lives > 0, respawn if true, else Game Over
-        if (lives > 0)
+        if (Health > 0)
         {
             transform.position = respawnPoint;
         }

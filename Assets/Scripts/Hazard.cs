@@ -13,7 +13,7 @@ public class Hazard : MonoBehaviour
         // Check if the player collided with this hazard, if so, deals damage to the player
         if (collision.gameObject.GetComponent<PlayerController>())
         {
-            collision.gameObject.GetComponent<PlayerController>().LoseLife();
+            collision.gameObject.GetComponent<PlayerController>().LoseHealth();
         }
     }
 
@@ -22,7 +22,7 @@ public class Hazard : MonoBehaviour
         // Check if the player overlapped with this hazard, if so, deals damage to the player
         if (other.gameObject.GetComponent<PlayerController>())
         {
-            other.gameObject.GetComponent<PlayerController>().LoseLife();
+            other.gameObject.GetComponent<PlayerController>().LoseHealth();
         }
     }
 }
