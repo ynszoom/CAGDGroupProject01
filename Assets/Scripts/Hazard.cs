@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /* Yasin Shilling
- * 4/1/25
+ * 4/5/25
  * Controls Hazard collision detection/damage dealt 
  */
 
 public class Hazard : MonoBehaviour
 {
+    public int damage = 1;
     private void OnCollisionEnter(Collision collision)
     {
         // Check if the player collided with this hazard, if so, deals damage to the player

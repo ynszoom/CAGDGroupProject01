@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /* Yasin Shilling
- * 4/1/25
+ * 4//25
  * Controls player movement 
  */
 
 public class PlayerController : MonoBehaviour
 {
-
+    
     public float speed = 15;
     public float jumpForce = 10;
-    public int coins = 0;
     public int Health;
     public int maxHealth = 3;
     
@@ -96,20 +95,46 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Reduces player's health by 1 and grants temporary invincibility
     /// </summary>
+
+    
     public void LoseHealth()
     {
-        // Reduces player's lives
-        Health--;
+        // Reduces player's Health
 
-        // Check if lives > 0, respawn if true, else Game Over
+
+        // Check if lives > 0, take damage if true, else Game Over
         if (Health > 0)
         {
-            transform.position = respawnPoint;
+            Health--;
+            //causes player to blink when taking damage
+            StartCoroutine(Blink());
         }
         else
         {
             print("GAME OVER");
         }
+    }
+
+
+
+
+
+    //makes the player blink in and out 
+    public IEnumerator Blink()
+    {
+        for (int index = 0; index < 30; index++)
+        {
+            if (index % 2 == 0)
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().enabled = true;
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+        GetComponent<MeshRenderer>().enabled = true;
     }
 
     /// <summary>
