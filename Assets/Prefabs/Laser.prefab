@@ -148,3 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   goingLeft: 0
+  Enemy: {fileID: 0}
+  laserDamage: 1
