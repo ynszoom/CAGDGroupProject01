@@ -1,28 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /* Yasin Shilling
  * 4//25
- * Controls player movement 
+ * Controls player movement and health/damage
  */
 
 public class PlayerController : MonoBehaviour
 {
-    
+    public Slider Slider;//for healthbar
     public float speed = 15;
     public float jumpForce = 10;
     public int Health;
-    public int maxHealth = 3;
-    
-
+    public int maxHealth = 100;
     private Rigidbody rb;
     private Vector3 respawnPoint;
-    
+    public bool isInvincible = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Health = maxHealth;
+        Slider.maxValue = maxHealth;
+        Slider.value = Health;
         rb = GetComponent<Rigidbody>();
         respawnPoint = transform.position;
     }
@@ -45,14 +46,14 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Check for inputs, then performs the corresponding action
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             // Move right
             rb.MovePosition(transform.position + Vector3.right * speed * Time.deltaTime);
             //rotates character facing right
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             // Move left
             rb.MovePosition(transform.position + Vector3.left * speed * Time.deltaTime);
@@ -96,23 +97,39 @@ public class PlayerController : MonoBehaviour
     /// Reduces player's health by 1 and grants temporary invincibility
     /// </summary>
 
-    
+    private IEnumerator DamagePause()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        isInvincible = false;
+    }
+    public void TakeDamage(int damageAmount)
+    {
+        if (!isInvincible)
+        {
+            //Player takes damage
+            Health -= damageAmount;
+            //Changes healthbar to show damage
+            Slider.value = Health;
+            //Player becomes temporarily invincible
+            StartCoroutine(DamagePause());
+            //causes player to blink when taking damage
+            StartCoroutine(Blink());
+        }
+        // Check if health<= 0, take damage if true Game Over
+        if (Health <=0)
+        {
+            print("GAME OVER");
+            Destroy(gameObject);
+        }
+
+    }
+    //DO NOT TOUCH, THIS DOES NOTHING BUT KEEPS BREAKING THINGS WHEN REMOVED
     public void LoseHealth()
     {
         // Reduces player's Health
 
 
-        // Check if lives > 0, take damage if true, else Game Over
-        if (Health > 0)
-        {
-            Health--;
-            //causes player to blink when taking damage
-            StartCoroutine(Blink());
-        }
-        else
-        {
-            print("GAME OVER");
-        }
     }
 
 

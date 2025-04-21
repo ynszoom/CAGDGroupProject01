@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 /*Yasin Shilling
 4/19/2025
@@ -14,6 +15,9 @@ public class Gun : MonoBehaviour
     public GameObject projectilePrefab;
     private float lastShotTime = 0f;
     private float fireRate = 1f; // Time between shots in seconds
+    public Transform firingPoint;
+    public GameObject Laser;
+   
     // Update is called once per frame
     void Update()
     {//shoots the gun
@@ -21,18 +25,14 @@ public class Gun : MonoBehaviour
         {
             // Limits fire rate of gun
             lastShotTime = Time.time;
-            SpawnProjectile();
+            Fire();
         }
+        
+        
     }
-
-    public void SpawnProjectile()
+    private void Fire()
     {
-        GameObject projectile = Instantiate
-            (projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        //determines what direction the laser fires
-        if (projectile.GetComponent<Laser>())
-        {
-            projectile.GetComponent<Laser>().goingLeft = goingLeft;
-        }
+        Instantiate(Laser, firingPoint.position,transform.rotation);
     }
+    
 }

@@ -6,39 +6,34 @@ using UnityEngine;
  * 4/18/2025
  * Determines how lasers behave
  */
+
+
+
+
+
 public class Laser : MonoBehaviour
 {
     [Header("Projectile Variables")]
     public float speed;
     public bool goingLeft;
+    private Rigidbody rb;
 
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            goingLeft = true;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            goingLeft = false;
-        }
-
-        
+        rb = GetComponent<Rigidbody>();
+        rb.velocity = transform.right * speed;
     }
-    private void FixedUpdate()
+    void OnTriggerEnter(Collider other)
     {
-        if (goingLeft == true)
+        // Check if the colliding object's tag is NOT "Player"
+        if (other.gameObject.tag != "Player")
         {
-            transform.position += speed * Vector3.left * Time.deltaTime;
-        }
-        else
-        {
-            transform.position += speed * Vector3.right * Time.deltaTime;
+            // destroy the object  to remove it)
+            Destroy(gameObject);
         }
     }
+
+
 }
 
 

@@ -8,16 +8,19 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 15;
+    public PlayerController Health;
+
     private void OnCollisionEnter(Collision collision)
     {
         // Check if the player collided with this hazard, if so, deals damage to the player
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().LoseHealth();
+            Health = collision.gameObject.GetComponent<PlayerController>();
+            Health.TakeDamage(damage);
         }
     }
-
+    //DO NOT TOUCH, THIS DOES NOTHING BUT KEEPS BREAKING THINGS WHEN REMOVED
     private void OnTriggerEnter(Collider other)
     {
         // Check if the player overlapped with this hazard, if so, deals damage to the player
