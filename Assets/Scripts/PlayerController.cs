@@ -170,5 +170,9 @@ public class PlayerController : MonoBehaviour
             //bring the player back to the start position
             transform.position = respawnPoint;
         }
+        if(other.gameObject.tag == "Lava")
+        {
+            transform.position = respawnPoint;
+        }
     }
 }
