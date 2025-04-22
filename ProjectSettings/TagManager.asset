@@ -9,6 +9,7 @@ TagManager:
   - Gun
   - HLaser
   - Portal
+  - Lava
   layers:
   - Default
   - TransparentFX
