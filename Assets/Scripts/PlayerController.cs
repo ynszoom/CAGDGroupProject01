@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 /* Yasin Shilling
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 respawnPoint;
     public bool isInvincible = false;
+    public GameObject InGameText;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     
         
     /// <summary>
-    /// Checks for player jump input and 
+    /// Checks for player input and jumps accordingly 
     /// </summary>
     private void Jump()
     {
@@ -119,11 +121,13 @@ public class PlayerController : MonoBehaviour
         // Check if health<= 0, take damage if true Game Over
         if (Health <=0)
         {
-            print("GAME OVER");
             Destroy(gameObject);
         }
 
+        
+
     }
+
     //DO NOT TOUCH, THIS DOES NOTHING BUT KEEPS BREAKING THINGS WHEN REMOVED
     public void LoseHealth()
     {
@@ -153,7 +157,7 @@ public class PlayerController : MonoBehaviour
         }
         GetComponent<MeshRenderer>().enabled = true;
     }
-
+    
     /// <summary>
     /// Olivia's Edits
     /// </summary>
